@@ -1,4 +1,4 @@
-# Bread Crumbs - A Budget Tracker Application
+# Bread Crumbs - A Budget Tracking Application
 
 ## Project Overview:
 The Budget Tracker Application is a web-based financial management tool designed to help users manage their expenses and income effectively. The primary goal of this project is to provide a user-friendly interface for tracking financial transactions, categorizing expenses, and generating useful reports. By offering these features, the application aims to assist users in achieving better financial control and planning.
