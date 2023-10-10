@@ -1,0 +1,3 @@
+# Exclude virtual environments
+wvenv/  # For Windows (replace with your actual Windows venv name)
+venv/   # For Ubuntu (replace with your actual Ubuntu venv name)
