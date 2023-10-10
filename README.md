@@ -1,7 +1,7 @@
-# Bread Crumbs - A Budget Tracking Application
+# Breadcrumbs: Trail your money
 
 ## Project Overview:
-The Budget Tracker Application is a web-based financial management tool designed to help users manage their expenses and income effectively. The primary goal of this project is to provide a user-friendly interface for tracking financial transactions, categorizing expenses, and generating useful reports. By offering these features, the application aims to assist users in achieving better financial control and planning.
+Breadcrumbs got its name from the traditional story of Hansel and Gretel, who leave a trail of breadcrumbs behind them as they walk through a forest, intending to use them in order to retrace their steps, and bread being the slang for money. This Budget Tracker Application is a web-based financial management tool designed to help users manage their expenses and income effectively by providing a user-friendly interface for tracking financial transactions, categorizing expenses, and generating useful reports. By offering these features, the application aims to assist users in achieving better financial control and planning.
 
 ## Features and Functionality:
 - **User Registration and Authentication**: Users can create accounts and log in to access their personal financial data securely.
@@ -40,6 +40,7 @@ In the future, I plan to implement the following enhancements:
 
 - **Mobile App**: Develop a mobile application for better accessibility on the go.
 - **OCR Input**: Record expense by snapping a picture of the receipt.
+- **Integration with Bank Accounts**: Improve transaction logging by syncing with bank accounts.
 
 ## Contact Information:
 - **My Name**: Yahaya (Yahai) Aluke
