@@ -3,21 +3,19 @@ Start
 |
 |--- Define Project Scope & Goals
 |    |
-|    |--- Identify Target Audience
-|    |
 |    |--- Create Wireframes & UI Mockups
 |    |
 |    |--- Plan Database Structure
 |
 |--- Set Up Development Environment
 |    |
-|    |--- Install Python & Dependencies
+|    |--- Set Up Version Control (Git)
 |    |
 |    |--- Create Virtual Environment
 |    |
-|    |--- Initialize Flask Project Structure
+|    |--- Install Dependencies
 |    |
-|    |--- Set Up Version Control (Git)
+|    |--- Initialize Flask Project Structure
 |
 |--- Build the Backend
 |    |
@@ -25,13 +23,11 @@ Start
 |    |    |
 |    |    |--- User Registration & Login
 |    |    |
-|    |    |--- Add Transactions
+|    |    |--- Transactions Management
 |    |    |
-|    |    |--- Categorize Expenses
+|    |    |--- Goal Setting
 |    |    |
-|    |    |--- Retrieve & Display Transactions
-|    |    |
-|    |    |--- Generate Reports
+|    |    |--- Reports Generation
 |    |
 |    |--- Database Setup (SQLAlchemy)
 |    |    |
@@ -54,10 +50,6 @@ Start
 |--- User Authentication & Authorization
 |    |
 |    |--- Implement User Registration & Login
-|    |
-|    |--- Create User Roles & Permissions
-|    |
-|    |--- Ensure Secure Access Control
 |
 |--- Generate Reports or Visualizations
 |    |
