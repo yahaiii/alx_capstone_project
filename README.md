@@ -26,8 +26,9 @@ The Budget Tracker Application is a web-based financial management tool designed
 ![Dashboard](wireframes/1-Dashboard-I.png)
 ![Dashboard (Continued)](wireframes/2-Dashboard-II.png)
 ![Transactions](wireframes/3-Transactions.png)
-![Add Transaction](wireframes/4-Add-Transactions.png)
-![User Settings](wireframes/5-User-Settings.png)
+![Add Transaction](wireframes/4-Add-Transaction.png)
+![Edit Transaction](wireframes/5-Edit-Transaction.png)
+![User Settings](wireframes/6-User-Settings.png)
 
 ## Demo:
 [Live Demo (Not yet ready)](#)
