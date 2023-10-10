@@ -8,7 +8,9 @@ The Budget Tracker Application is a web-based financial management tool designed
 - **Transaction Management**: Add, edit, and delete transactions with ease, including information like date, description, amount, and category.
 - **Expense Categorization**: Organize transactions into different categories, making it easier to track spending habits.
 - **Budget Goals**: Allow users to set budget goals and receive notifications when they are approaching their limits.
+- **Expense Insights**: Provide more detailed insights into spending patterns, including monthly and yearly breakdowns.
 - **Financial Reports**: Generate reports and visualizations, such as pie charts or bar graphs, to visualize income vs. expenses over time.
+- **Data Export**: Enable users to export their financial data in various formats (e.g., CSV, PDF).
 - **User-Friendly Interface**: An intuitive and responsive web interface that makes managing finances simple and efficient.
 
 ## Technologies Used:
@@ -36,9 +38,8 @@ The Budget Tracker Application is a web-based financial management tool designed
 ## Roadmap and Future Enhancements:
 In the future, I plan to implement the following enhancements:
 
-- **Expense Insights**: Provide more detailed insights into spending patterns, including monthly and yearly breakdowns.
 - **Mobile App**: Develop a mobile application for better accessibility on the go.
-- **Data Export**: Enable users to export their financial data in various formats (e.g., CSV, PDF).
+- **OCR Input**: Record expense by snapping a picture of the receipt.
 
 ## Contact Information:
 - **My Name**: Yahaya (Yahai) Aluke
