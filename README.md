@@ -44,6 +44,12 @@ alx_capstone_project/
 │   │   ├── insights.py
 │   │   ├── reports.py
 │   │   ├── data_export.py
+│   ├── forms/
+│   │   ├── __init__.py
+│   │   ├── registration_form.py
+│   │   ├── transaction_form.py
+│   │   ├── categories_form.py
+│   │   ├── goals_form.py
 │   ├── models.py
 │   ├── templates/
 │   │   ├── base.html
@@ -74,6 +80,8 @@ alx_capstone_project/
 - **`__init__.py`**: This file assumes the role of initializing the Flask application and configuring it by importing Blueprints. It serves as the main entry point for the application's core functionalities.
 
 - **`routes/`**: Within this directory, individual route definition files are arranged according to the Flask Blueprint pattern.
+
+- **`forms/`**: Organize form classes, these forms will be used for server-side form validation and data processing.
 
   - **`auth.py`**: This module is responsible for overseeing user registration and authentication. It features route definitions for tasks such as user account creation, login, and logout.
 

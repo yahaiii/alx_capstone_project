@@ -3,4 +3,9 @@ wvenv/
 venv/
 .wvenv
 .venv
+
+# Exclude vs code configs
 .vscode
+
+# Exclude others
+__pycache__/
