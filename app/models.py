@@ -14,13 +14,13 @@ Classes:
 
 from app import db
 from datetime import datetime
+from werkzeug.security import generate_password_hash, check_password_hash
 
 class User(db.Model):
-    class User(db.Model):
-        """
-        Represents a user in the system.
+    """
+    Represents a user in the system.
     
-        Fields:
+    Fields:
         - id: The unique identifier for the user.
         - username: The username of the user.
         - first_name: The first name of the user.
@@ -28,10 +28,10 @@ class User(db.Model):
         - email: The email address of the user.
         - password_hash: The hashed password of the user.
     
-        Methods:
+    Methods:
         - set_password: Set the password for the user.
         - check_password: Check if the password is correct for the user.
-        """
+    """
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     first_name = db.Column(db.String(50), nullable=False)
@@ -120,23 +120,6 @@ class Budget(db.Model):
     total_budgeted_amount = db.Column(db.Float)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User', back_populates='budgets')
-
-class Budget(db.Model):
-    """
-    Represents a budget for managing expenses.
-
-    Fields:
-    - id: The unique identifier for the budget.
-    - name: The name of the budget.
-    - total_budgeted_amount: The total budgeted amount for the budget.
-    - user_id: The foreign key to the user associated with the budget.
-    - user: The relationship to the user associated with the budget.
-    """
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100))
-    target_amount = db.Column(db.Float)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship('User', back_populates='goals')
 
 class Goal(db.Model):
     """

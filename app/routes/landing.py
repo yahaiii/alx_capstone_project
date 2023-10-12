@@ -7,9 +7,9 @@ Returns:
 from flask import Blueprint, render_template
 
 # Create a Blueprint for the landing page routes
-landing_blueprint = Blueprint('landing', __name__)
+landing_bp = Blueprint('landing', __name__)
 
-@landing_blueprint.route('/')
+@landing_bp.route('/')
 def landing_page():
     return render_template('landing.html')
 
