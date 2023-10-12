@@ -30,13 +30,14 @@ The `app/` directory within the Breadcrumb application encompasses the core comp
 ```
 alx_capstone_project/
 │
-├── config.py
-│
-├── instance/
-│   ├── config.py
 │
 ├── app/
-│   ├── __init__.py
+│   ├── forms/
+│   │   ├── __init__.py
+│   │   ├── registration_form.py
+│   │   ├── transaction_form.py
+│   │   ├── categories_form.py
+│   │   ├── goals_form.py
 │   ├── routes/
 │   │   ├── __init__.py
 │   │   ├── auth.py
@@ -46,13 +47,10 @@ alx_capstone_project/
 │   │   ├── insights.py
 │   │   ├── reports.py
 │   │   ├── data_export.py
-│   ├── forms/
-│   │   ├── __init__.py
-│   │   ├── registration_form.py
-│   │   ├── transaction_form.py
-│   │   ├── categories_form.py
-│   │   ├── goals_form.py
-│   ├── models.py
+│   ├── static/
+│   │   ├── css/
+│   │   ├── js/
+│   │   ├── img/
 │   ├── templates/
 │   │   ├── base.html
 │   │   ├── dashboard.html
@@ -62,18 +60,30 @@ alx_capstone_project/
 │   │   ├── insights.html
 │   │   ├── reports.html
 │   │   ├── export_data.html
-│   ├── static/
-│   │   ├── css/
-│   │   ├── js/
-│   │   ├── img/
+│   ├── __init__.py
+│   ├── models.py
 │
 ├── migrations/
+│   ├── versions/
+│   │   ├── v1
+│   ├── alembic.ini
+│   ├── env.py
+│   ├── README
+│   ├── script.py.mako
 │
 ├── tests/
+│   ├── integration/
+│   ├── unit/
 │
 ├── venv/
 │
+├── .gitignore
+├── CHANGELOG.md
+├── config.py
+├── README.md
+├── requirements.txt
 ├── run.py
+├── WORKFLOW.md
 
 ```
 
@@ -132,6 +142,6 @@ In the future, I plan to implement the following enhancements:
 - **Developer**: Yahaya (Yahai) Aluke
 - **Email**: yahayaaaluke@gmail.com
 - [LinkedIn](https://www.linkedin.com/in/yahayaaluke)
-- [Twitter](https://www.twitter.com/yahai)
+- [Twitter](https://www.twitter.com/yahaiii)
 
 Feel free to reach out if you have any questions or suggestions for improvements!
