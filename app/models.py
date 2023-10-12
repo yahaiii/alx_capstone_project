@@ -55,7 +55,7 @@ class Insight(db.Model):
     content = db.Column(db.Text)
     generation_date = db.Column(db.DateTime, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship('User', backpopulates='insights')
+    user = db.relationship('User', back_populates='insights')
 
 class Notification(db.Model):
     id = db.Column(db.Integer, primary_key=True)

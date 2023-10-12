@@ -3,7 +3,8 @@
 # Flask Configuration
 SECRET_KEY = '4dLove_of_Br3Ad'
 DEBUG = True
-SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:password@localhost/Breadcrumbs'
+#SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:password@localhost/Breadcrumbs'
+SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://yahayaal:password@db4free.net/breadcrumbs'
 SQLALCHEMY_TRACK_MODIFICATIONS = False  # Set to False to improve performance
 
 # Flask-Mail Configuration (if using email functionality)
