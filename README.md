@@ -129,9 +129,9 @@ In the future, I plan to implement the following enhancements:
 - **Integration with Bank Accounts**: Improve transaction logging by syncing with bank accounts.
 
 ## Contact Information:
-- **My Name**: Yahaya (Yahai) Aluke
+- **Developer**: Yahaya (Yahai) Aluke
 - **Email**: yahayaaaluke@gmail.com
-- [GitHub](https://github.com/yahaiii)
 - [LinkedIn](https://www.linkedin.com/in/yahayaaluke)
+- [Twitter](https://www.twitter.com/yahai)
 
 Feel free to reach out if you have any questions or suggestions for improvements!
