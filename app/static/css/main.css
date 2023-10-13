@@ -94,7 +94,24 @@ button {
     cursor: pointer;
 }
 
+.btn {
+
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    text-decoration: none;
+
+
+}
+
 button:hover {
+    background-color: var(--dark-color);
+}
+
+.btn:hover {
     background-color: var(--dark-color);
 }
 
@@ -143,7 +160,7 @@ button:hover {
 
 /*** LANDING PAGE STYLING ***/
 .landing-container {
-    margin: 7em; /* Add margin for space around the container */
+    margin: 0; /* Add margin for space around the container */
     padding: 10em; /* Add padding for space inside the container */
     text-align: center;
 }

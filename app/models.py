@@ -12,14 +12,16 @@ Classes:
 - Notification: Represents a notification for the user.
 """
 
-from app import db
+from app import db, login_manager
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 
-class User(db.Model):
+
+class User(db.Model, UserMixin):
     """
     Represents a user in the system.
-    
+
     Fields:
         - id: The unique identifier for the user.
         - username: The username of the user.
@@ -27,7 +29,7 @@ class User(db.Model):
         - last_name: The last name of the user.
         - email: The email address of the user.
         - password_hash: The hashed password of the user.
-    
+
     Methods:
         - set_password: Set the password for the user.
         - check_password: Check if the password is correct for the user.
@@ -50,7 +52,7 @@ class User(db.Model):
             None
         """
         self.password_hash = generate_password_hash(password)
-    
+
     def check_password(self, password):
         """
         Check if the password is correct for the user.
@@ -62,6 +64,13 @@ class User(db.Model):
             bool: True if the password is correct, False otherwise.
         """
         return check_password_hash(self.password_hash, password)
+
+    def get_id(self):
+        return str(self.id)
+    
+    @login_manager.user_loader
+    def load_user(id):
+        return User.query.get(int(id)) # slightly modified such that the user is loaded based on the id in the db
         
 
 class Transaction(db.Model):

@@ -3,21 +3,21 @@
 <head>
     <meta charset="utf-8">
     <title>{% block title %}Breadcrumbs{% endblock %}</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
     <header class="navbar">
         <nav class="navbar-container">
-            <a class="navbar-logo" href="{{ url_for('home') }}">
-                <img src="{{ url_for('static', filename='img/breadcrumbs_logo.png') }}" alt="Breadcrumbs Logo">
+            <a class="navbar-logo" href="{{ url_for('landing.landing_page') }}">
+                <img src="{{ url_for('static', filename='img/breadcrumbs_logo_black.png') }}" alt="Breadcrumbs Logo">
             </a>
             <ul class="navbar-links">
                 <li>
-                    <a class="navbar-profile" href="{{ url_for('settings') }}">
+                    <a class="navbar-profile" href="{{ url_for('settings.user_settings') }}">
                         <img src="{{ url_for('static', filename='img/profile_image.png') }}" alt="Profile">
                     </a>
                 </li>
-                <li><a class="navbar-logout" href="{{ url_for('logout') }}">Logout</a></li>
+                <li><a class="navbar-logout" href="{{ url_for('landing.landing_page') }}">Logout</a></li>
             </ul>
         </nav>
     </header>

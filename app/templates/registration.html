@@ -1,8 +1,12 @@
-{% extends "base.html" %}
-
-{% block title %}Registration | Breadcrumbs{% endblock %}
-
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration | Breadcrumbs</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
     <div class="registration-container">
         <h2 class="registration-title">Sign Up</h2>
         <form class="registration-form" method="POST">
@@ -36,4 +40,5 @@
             </div>
         </form>
     </div>
-{% endblock %}
+</body>
+</html>

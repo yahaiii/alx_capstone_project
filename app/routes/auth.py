@@ -1,5 +1,7 @@
-from flask import Blueprint, render_template, redirect, url_for, flash
+from flask import Blueprint, render_template, redirect, url_for, flash, request
+from flask_login import login_user, current_user, logout_user, login_required
 from app.forms.registration_form import RegistrationForm
+from app.forms.login_form import LoginForm
 from app.models import db, User
 
 auth_bp = Blueprint('auth', __name__)
@@ -50,3 +52,30 @@ def register():
             return redirect(url_for('auth.login'))
 
     return render_template('registration.html', form=form)
+
+
+@auth_bp.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()  # Create an instance of the LoginForm
+
+    if form.validate_on_submit():
+        # Form submission
+        user = User.query.filter_by(username=form.username.data).first()
+        if user is None or not user.check_password(form.password.data):
+            flash('Invalid username or password', 'danger')
+            return redirect(url_for('auth.login'))
+
+        login_user(user)  # Log the user in
+
+        # Redirect to the 'next' page if provided, or to a default page
+        next_page = request.args.get('next')
+        return redirect(next_page or url_for('landing.landing_page'))
+
+    return render_template('login.html', form=form)
+
+@auth_bp.route('/logout')
+@login_required
+def logout():
+    logout_user()  # Log the user out
+    flash('You have been logged out.', 'info')
+    return redirect(url_for('auth.login'))
