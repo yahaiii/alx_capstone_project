@@ -41,6 +41,14 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(128), nullable=False)
 
+    # Define relationships:
+    transactions = db.relationship('Transaction', back_populates='user')
+    budgets = db.relationship('Budget', back_populates='user')
+    goals = db.relationship('Goal', back_populates='user')
+    insights = db.relationship('Insight', back_populates='user')
+    notifications = db.relationship('Notification', back_populates='user')
+    reports = db.relationship('Report', back_populates='user')
+
     def set_password(self, password):
         """
         Set the password for the user.
@@ -91,10 +99,14 @@ class Transaction(db.Model):
     date = db.Column(db.Date)
     description = db.Column(db.String(255))
     amount = db.Column(db.Float)
+
+    # Foreign keys
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
-    category = db.relationship('Category', back_populates='transactions')
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    # Define relationships:
     user = db.relationship('User', back_populates='transactions')
+    category = db.relationship('Category', back_populates='transactions')
 
 class Category(db.Model):
     """
@@ -109,9 +121,9 @@ class Category(db.Model):
     """
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
+
+    # Relationships
     transactions = db.relationship('Transaction', back_populates='category')
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship('User', back_populates='categories')
 
 class Budget(db.Model):
     """
@@ -127,7 +139,11 @@ class Budget(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
     total_budgeted_amount = db.Column(db.Float)
+
+    # Define foreign keys
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    # Define relationship
     user = db.relationship('User', back_populates='budgets')
 
 class Goal(db.Model):
@@ -143,10 +159,14 @@ class Goal(db.Model):
     """
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
-    report_type = db.Column(db.String(50))
+    goal_type = db.Column(db.String(50))
     generation_date = db.Column(db.DateTime, default=datetime.utcnow)
+
+    # Define foreign keys
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship('User', back_populates='reports')
+
+    # Define relationships
+    user = db.relationship('User', back_populates='goals')
 
 class Insight(db.Model):
     """
@@ -162,7 +182,11 @@ class Insight(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text)
     generation_date = db.Column(db.DateTime, default=datetime.utcnow)
+
+    # Define foreign keys
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    # Define relationships
     user = db.relationship('User', back_populates='insights')
 
 class Notification(db.Model):
@@ -181,5 +205,56 @@ class Notification(db.Model):
     title = db.Column(db.String(100))
     content = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+
+    # Define foreign keys
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    # Define relationships
     user = db.relationship('User', back_populates='notifications')
+
+class Report(db.Model):
+    """
+    Represents a generated report.
+
+    Fields:
+    - id: The unique identifier for the report.
+    - name: The name or title of the report.
+    - content: The content of the report, which can include transaction details.
+    - start_date: The start date of the report's time range.
+    - end_date: The end date of the report's time range.
+    - timestamp: The timestamp of the report's generation.
+    - user_id: The foreign key to the user associated with the report.
+    - user: The relationship to the user associated with the report.
+    """
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    content = db.Column(db.Text)
+    start_date = db.Column(db.Date)
+    end_date = db.Column(db.Date)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+
+    # Define foreign keys
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    # Define relationships
+    user = db.relationship('User', back_populates='reports')
+
+    def generate_pdf_report(self):
+        """
+        Generate a PDF report based on the report's content.
+
+        You'll need to implement the logic for generating a PDF report here.
+        """
+        # Placeholder for generating PDF report
+        # You can use libraries like ReportLab or pdfkit for PDF generation
+        pass
+
+    def generate_csv_report(self):
+        """
+        Generate a CSV report based on the report's content.
+
+        You'll need to implement the logic for generating a CSV report here.
+        """
+        # Placeholder for generating CSV report
+        # You can use libraries like csv or pandas for CSV generation
+        pass
