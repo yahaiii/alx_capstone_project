@@ -34,38 +34,49 @@ alx_capstone_project/
 ├── app/
 │   ├── forms/
 │   │   ├── __init__.py
+│   │   ├── login_form.py
 │   │   ├── registration_form.py
+│   │   ├── settings_form.py
 │   │   ├── transaction_form.py
-│   │   ├── categories_form.py
-│   │   ├── goals_form.py
 │   ├── routes/
 │   │   ├── __init__.py
 │   │   ├── auth.py
-│   │   ├── transactions.py
 │   │   ├── categories.py
+│   │   ├── data_export.py
 │   │   ├── goals.py
 │   │   ├── insights.py
+│   │   ├── landing.py
 │   │   ├── reports.py
-│   │   ├── data_export.py
+│   │   ├── settings.py
+│   │   ├── transactions.py
 │   ├── static/
 │   │   ├── css/
+│   │   │   ├── main.css
 │   │   ├── js/
 │   │   ├── img/
+│   │   │   ├── breadcrumbs_logo_black.png
+│   │   │   ├── breadcrumbs_logo.png
+│   │   │   ├── favicon.ico
+│   │   │   ├── profile_image.png
 │   ├── templates/
-│   │   ├── base.html
-│   │   ├── dashboard.html
 │   │   ├── add_transaction.html
-│   │   ├── categorize_expense.html
+│   │   ├── base.html
 │   │   ├── budget_goals.html
-│   │   ├── insights.html
-│   │   ├── reports.html
+│   │   ├── categorize_expense.html
+│   │   ├── dashboard.html
 │   │   ├── export_data.html
+│   │   ├── insights.html
+│   │   ├── landing.html
+│   │   ├── login.html
+│   │   ├── registration.html
+│   │   ├── reports.html
 │   ├── __init__.py
 │   ├── models.py
 │
 ├── migrations/
 │   ├── versions/
 │   │   ├── v1
+│   │   ├── v2
 │   ├── alembic.ini
 │   ├── env.py
 │   ├── README

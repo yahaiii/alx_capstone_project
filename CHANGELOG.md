@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file.
 ## [0.0.0] - 12-10-2023
 
 ### Added
-- Add a new feature or functionality.
+- Add authentication system (15/10/23).
 
 ### Changed
 - Modify or update an existing feature or functionality.
