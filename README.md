@@ -120,7 +120,10 @@ This structured approach to directory organization within the `app/` directory u
 ## App Flowchart:
 ![Flowchart](flowchart.png)
 
-## Bread Crumbs Wireframes:
+## Database Schema:
+![Schema](breadcrumbs_schema.png)
+
+## Breadcrumbs Wireframes:
 ![Dashboard](wireframes/1-Dashboard-I.png)
 ![Dashboard (Continued)](wireframes/2-Dashboard-II.png)
 ![Transactions](wireframes/3-Transactions.png)
