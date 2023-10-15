@@ -7,6 +7,19 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
+    <!-- Add this block to display flash messages -->
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+
     <div class="registration-container">
         <h2 class="registration-title">Sign Up</h2>
         <form class="registration-form" method="POST">
@@ -39,6 +52,8 @@
                 {{ form.submit(class="btn-primary") }}
             </div>
         </form>
+
+        <p>Already registered? <a href="/login">Login</a></p>
     </div>
 </body>
 </html>

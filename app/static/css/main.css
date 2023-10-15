@@ -172,6 +172,40 @@ button:hover {
 
 }
 
+/* Styling for flash messages container */
+.flash-messages {
+    background-color: #f7f7f7; /* Background color */
+    border: 1px solid #ccc; /* Border around the container */
+    padding: 10px; /* Padding inside the container */
+    margin: 10px 0; /* Margin around the container */
+    border-radius: 5px; /* Rounded corners */
+}
+
+/* Styling for individual flash messages */
+.flash-messages .messages {
+    list-style-type: none; /* Remove bullet points for list items */
+    padding: 0;
+}
+
+.flash-messages .messages li {
+    margin-bottom: 5px; /* Spacing between messages */
+    background-color: #dff0d8; /* Background color for success messages */
+    border: 1px solid #3c763d; /* Border for success messages */
+    color: #3c763d; /* Text color for success messages */
+    padding: 5px 10px; /* Padding inside each message */
+    border-radius: 5px; /* Rounded corners for each message */
+}
+
+/* Styling for error messages */
+.flash-messages .messages li.error {
+    background-color: #f2dede; /* Background color for error messages */
+    border: 1px solid #a94442; /* Border for error messages */
+    color: #a94442; /* Text color for error messages */
+}
+
+/* Add more specific styles for different message types (e.g., info, warning) as needed */
+
+
 /* Responsive design for mobile devices */
 @media (max-width: 768px) {
     .container {
