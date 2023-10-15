@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import current_user, login_required
 from app.forms.settings_form import ProfileSettingsForm, AccountSettingsForm, ChangePasswordForm, SetGoalsForm
 from app.models import db
@@ -25,7 +25,7 @@ def user_settings():
             db.session.commit()
             flash('Profile settings updated successfully.', 'success')
 
-        elif account_form.validate_on_submit():
+        if account_form.validate_on_submit():
             # Handle account settings update, e.g., update username and email
             current_user.username = account_form.username.data
             current_user.email = account_form.email.data
@@ -33,7 +33,7 @@ def user_settings():
             db.session.commit()
             flash('Account settings updated successfully.', 'success')
 
-        elif password_form.validate_on_submit():
+        if password_form.validate_on_submit():
             # Handle password change
             new_password = password_form.new_password.data
             # Check if the current password authorizes the change
@@ -46,7 +46,7 @@ def user_settings():
             else:
                 flash('Current password is incorrect. Password not changed.', 'danger')
 
-        elif goals_form.validate_on_submit():
+        if goals_form.validate_on_submit():
             # Handle setting goals, e.g., spending limit and income goal
             current_user.spending_limit = goals_form.spending_limit.data
             current_user.income_goal = goals_form.income_goal.data
@@ -54,4 +54,4 @@ def user_settings():
             db.session.commit()
             flash('Goals set successfully.', 'success')
 
-    return render_template('user_settings.html', profile_form=profile_form, account_form=account_form, password_form=password_form, goals_form=goals_form)
+    return render_template('settings.html', profile_form=profile_form, account_form=account_form, password_form=password_form, goals_form=goals_form)

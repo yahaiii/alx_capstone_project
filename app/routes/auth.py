@@ -76,7 +76,7 @@ def login():
         # Redirect to the 'next' page if provided, or to a default page
         next_page = request.args.get('next')
         print("Debug: Flash messages:", get_flashed_messages())  # Add this print
-        return redirect(next_page or url_for('landing.landing_page'))
+        return redirect(next_page or url_for('dashboard.dashboard'))
 
     return render_template('login.html', form=form)
 

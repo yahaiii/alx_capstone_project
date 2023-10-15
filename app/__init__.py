@@ -29,12 +29,17 @@ def create_app(config_filename='config.py'):
     # Import routes and other components
     from app import routes
     from app.routes.auth import auth_bp
+    from app.routes.dashboard import dashboard_bp
     from app.routes.landing import landing_bp
     from app.routes.settings import settings_bp
+    from app.routes.transactions import transactions_bp
+    
 
     # Register the blueprints
-    app.register_blueprint(auth_bp)   
+    app.register_blueprint(auth_bp)
+    app.register_blueprint(dashboard_bp)
     app.register_blueprint(landing_bp)
     app.register_blueprint(settings_bp)
+    app.register_blueprint(transactions_bp)
 
     return app
