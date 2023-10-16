@@ -1,0 +1,65 @@
+<!-- add_transaction.html -->
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Add Transaction</h2>
+    <form method="POST" action="{{ url_for('add_transaction') }}">
+        <label for="date">Date</label>
+        <input type="text" name="date" id="date" required>
+        
+        <label for="cashflow">Cashflow</label>
+        <select name="cashflow" id="cashflow" required>
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+        </select>
+        
+        <label for="category">Category</label>
+        <input type="text" name="category" id="category" required>
+        
+        <label for="mode">Mode</label>
+        <input type="text" name="mode" id="mode" required>
+        
+        <label for="comment">Comment</label>
+        <textarea name="comment" id="comment" rows="4"></textarea>
+        
+        <label for="amount">Amount</label>
+        <input type="number" name="amount" id="amount" step="0.01" required>
+        
+        <button type="submit">Add</button>
+    </form>
+{% endblock %}
+
+
+
+<!-- Modal Form -->
+<!-- <div id="add-transaction-popup" class="popup">
+    <div class="popup-content">
+        <span class="close-button" onclick="closePopup()">&times;</span>
+        <h2>Add Transaction</h2>
+        <form id="transaction-form" method="POST">
+            <label for="date">Date:</label>
+            <input type="date" name="date" id="date" required>
+
+            <label for="cashflow">Cashflow:</label>
+            <select name="cashflow" id="cashflow" required>
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+            </select>
+
+            <label for="category">Category:</label>
+            <select name="category" id="category" required>
+            </select>
+
+            <label for="mode">Mode:</label>
+            <input type="text" name="mode" id="mode" required>
+
+            <label for="comment">Comment:</label>
+            <textarea name="comment" id="comment" rows="4" cols="50"></textarea>
+
+            <label for="amount">Amount:</label>
+            <input type="number" name="amount" id="amount" step="0.01" required>
+
+            <input type="submit" value="Add Transaction">
+        </form>
+    </div>
+</div> -->

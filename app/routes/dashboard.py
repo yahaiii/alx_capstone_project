@@ -25,7 +25,7 @@ def dashboard():
 def transaction_history():
     # Retrieve and display the transaction history for the current user
     transactions = Transaction.query.filter_by(user_id=current_user.id).all()
-    return render_template('transaction_history.html', transactions=transactions)
+    return render_template('transactions.html', transactions=transactions)
 
 
 # Define additional routes for spending vs. goal and income vs. expenses visualizations here

@@ -21,14 +21,16 @@ def add_transaction():
     
     if form.validate_on_submit():
         # Create a new transaction and add it to the database
-        transaction = Transaction(
+        transaction = Transaction(  # Assuming you have a Transaction model defined
             date=form.date.data,
-            description=form.description.data,
-            amount=form.amount.data,
+            cashflow=form.cashflow.data,
             category=form.category.data,  # Assuming you have a category field in your form
-            user=current_user
+            mode=form.mode.data,
+            comment=form.comment.data,
+            amount=form.amount.data,
+            user=current_user  # Assuming you have a User model
         )
-        db.session.add(transaction)
+        db.session.add(transaction)  # Assuming you have a db object
         db.session.commit()
         flash('Transaction added successfully', 'success')
         return redirect(url_for('transactions.transaction_history'))

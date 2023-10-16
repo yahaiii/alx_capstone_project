@@ -6,12 +6,12 @@
         <h2>Transaction History</h2>
         
         <!-- Search Bar -->
-        <form method="get" action="{{ url_for('dashboard.transaction_history') }}">
+        <form method="get" action="{{ url_for('transactions.transaction_history') }}">
             <input type="text" name="search" id="transaction-search" placeholder="Search for transactions..." value="{{ request.args.get('search', '') }}">
             <button type="submit">Search</button>
         </form>
         <!-- Button to add a new transaction -->
-        <a href="{{ url_for('add_transaction') }}" class="button">Add Transaction</a>
+        <a href="{{ url_for('transactions.add_transaction') }}" class="button">Add Transaction</a>
         
         {% if transactions.items %}
             <!-- Transaction History Table -->

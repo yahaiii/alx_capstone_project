@@ -88,16 +88,20 @@ class Transaction(db.Model):
     Fields:
     - id: The unique identifier for the transaction.
     - date: The date of the transaction.
-    - description: The description of the transaction.
+    - cashflow: The type of cashflow (income or expense).
+    - category: The category of the transaction.
+    - mode: The mode of the transaction.
+    - comment: A comment or description of the transaction.
     - amount: The amount of the transaction.
-    - category_id: The foreign key to the category of the transaction.
-    - category: The relationship to the category of the transaction.
     - user_id: The foreign key to the user associated with the transaction.
     - user: The relationship to the user associated with the transaction.
     """
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Date)
-    description = db.Column(db.String(255))
+    cashflow = db.Column(db.String(10))
+    category = db.Column(db.String(255))
+    mode = db.Column(db.String(50))
+    comment = db.Column(db.String(255))
     amount = db.Column(db.Float)
 
     # Foreign keys
