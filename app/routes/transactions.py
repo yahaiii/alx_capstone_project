@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
 from app import db
-from app.models import Transaction
+from app.models import Transaction, Category
 from app.forms.transaction_form import TransactionForm
 
 # Create a Blueprint for the transactions routes
@@ -18,19 +18,26 @@ def transaction_history():
 @login_required
 def add_transaction():
     form = TransactionForm()
+
+    # Fetch categories from the Category model.
+    categories = Category.query.all()
+
+    # Pass the categories to the form.
+    form.category.choices = [(category.id, category.name) for category in categories]
     
     if form.validate_on_submit():
         # Create a new transaction and add it to the database
-        transaction = Transaction(  # Assuming you have a Transaction model defined
+        transaction = Transaction(
             date=form.date.data,
             cashflow=form.cashflow.data,
-            category=form.category.data,  # Assuming you have a category field in your form
+            category_id=form.category.data,
             mode=form.mode.data,
             comment=form.comment.data,
             amount=form.amount.data,
-            user=current_user  # Assuming you have a User model
+            user=current_user 
         )
-        db.session.add(transaction)  # Assuming you have a db object
+        
+        db.session.add(transaction) 
         db.session.commit()
         flash('Transaction added successfully', 'success')
         return redirect(url_for('transactions.transaction_history'))

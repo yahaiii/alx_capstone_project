@@ -4,6 +4,11 @@
     <!-- Transactions Page -->
     <section class="dashboard-section">
         <h2>Transaction History</h2>
+
+        {% if flash_message %}
+            <div class="flash-message">{{ flash_message }}</div>
+        {% endif %}
+
         
         <!-- Search Bar -->
         <form method="get" action="{{ url_for('transactions.transaction_history') }}">
@@ -13,7 +18,7 @@
         <!-- Button to add a new transaction -->
         <a href="{{ url_for('transactions.add_transaction') }}" class="button">Add Transaction</a>
         
-        {% if transactions.items %}
+        {% if transactions %}
             <!-- Transaction History Table -->
             <table>
                 <thead>
@@ -38,9 +43,9 @@
                             <td>${{ transaction.amount }}</td>
                             <td>
                                 <!-- Edit Transaction -->
-                                <a href="{{ url_for('dashboard.edit_transaction', transaction_id=transaction.id) }}" class="button">Edit</a>
+                                <a href="{{ url_for('transactions.edit_transaction', transaction_id=transaction.id) }}" class="button">Edit</a>
                                 <!-- Delete Transaction -->
-                                <form method="post" action="{{ url_for('dashboard.delete_transaction', transaction_id=transaction.id) }}">
+                                <form method="post" action="{{ url_for('transactions.delete_transaction', transaction_id=transaction.id) }}">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <button type="submit" class="button">Delete</button>
                                 </form>
