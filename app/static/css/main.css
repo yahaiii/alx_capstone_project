@@ -20,7 +20,35 @@
 body {
     background-color: var(--neutral-background-color);
     color: #333;
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    grid-template-rows: 60px 1fr 60px;
+    grid-template-areas:
+        "navbar navbar"
+        "sidebar content"
+        "footer footer";
 }
+
+/* Set the sidebar and content areas */
+
+.navbar {
+    grid-area: navbar;
+  }
+  
+  .sidebar {
+    grid-area: sidebar;
+    margin-top: 60px;
+  }
+  
+  .content {
+    grid-area: content;
+    padding: 2em;
+  }
+  
+  footer {
+    grid-area: footer;
+  }
+
 
 /* Center the content vertically and horizontally */
 .container {
@@ -64,13 +92,7 @@ a.button:hover {
     background-color: var(--dark-color);
 }
 
-/* Create a simple navigation bar */
-.navbar {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
-    text-align: center;
-}
+
 
 /* Style form elements */
 input[type="text"],
@@ -205,6 +227,100 @@ button:hover {
 
 /*** DASHBOARD STYLES ***/
 
+/* Styles for the navigation bar */
+
+.navbar {
+    background-color: #3498db;
+    color: #ffffff;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-logo {
+    float: left;
+}
+
+.navbar-logo img {
+    width: 15em;
+}
+
+.user-profile {
+    float: right;
+}
+
+
+.user-profile a {
+    text-decoration: none;
+    color: #ffffff;
+    margin-left: 20px;
+}
+
+.user-profile a img {
+    width: 3em;
+}
+
+.user-profile a:hover {
+    text-decoration: underline;
+}
+
+
+/* SIDEBAR STYLES */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 250px;
+    background-color: #fff;
+    padding: 10px;
+  }
+  
+  .sidebar .user-details {
+    text-align: center;
+    padding: 2em;
+  }
+  
+  .sidebar .user-details img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+  }
+  
+  .sidebar .user-details h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  
+  .sidebar .user-details p {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  .sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .sidebar-menu a {
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    color: #333;
+  }
+  
+  .sidebar-menu a:hover {
+    background-color: #f1f1f1;
+  }
+  
+  
+  
+
+  /* MAIN CONTENT */
 .dashboard-container {
     display: flex;
     flex-direction: column;
@@ -329,6 +445,86 @@ button:hover {
 .transaction-history-button:hover {
     background-color: var(--dark-color);
 }
+
+
+/*** FOOTER STYLING ***/
+footer {
+    background-color: #ccc;
+    padding: 10px 0;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+  
+  footer .footer-content {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  footer .footer-section {
+    flex-basis: 25%;
+  }
+  
+  footer .footer-section h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  
+  footer .footer-section p {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  footer .footer-section ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  footer .footer-section li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  footer .footer-section a {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  footer .footer-section a:hover {
+    color: #000;
+  }
+  
+  footer .footer-bottom {
+    padding-top: 10px;
+    text-align: center;
+  }
+  
+  footer .footer-bottom p {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  footer .footer-bottom ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  footer .footer-bottom li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  footer .footer-bottom a {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  footer .footer-bottom a:hover {
+    color: #000;
+  }
+  
 
 
 
