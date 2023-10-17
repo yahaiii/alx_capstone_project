@@ -1,7 +1,7 @@
 # Breadcrumbs: Trail your money
 
 ## Project Overview:
-Breadcrumbs means a well organised and healthy financial life for its users. It got its name from the traditional story of Hansel and Gretel, who leave a trail of breadcrumbs behind them as they walk through a forest, intending to use them in order to retrace their steps. That bread is slang for money is a double entendre. 
+Breadcrumbs automates financial discipline, it means a well-organised and healthy financial life for its users. Its name is a nod to the classic tale of Hansel and Gretel, who leave a trail of breadcrumbs behind them as they walk through a forest, intending to use them in order to retrace their steps. My app will help you trail your way to financial success. Let's not forget that bread is slang for money too, a delightful double entendre. 
 
 This Budget Tracker Application is a web-based financial management tool designed to help users manage their expenses and income effectively by providing a user-friendly interface for tracking financial transactions, categorizing expenses, and generating useful reports. By offering these features, the application aims to assist users in achieving better financial control and planning.
 
