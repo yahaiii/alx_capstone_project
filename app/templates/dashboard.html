@@ -48,7 +48,6 @@
                 <th>Date</th>
                 <th>Cashflow</th>
                 <th>Category</th>
-                <th>Mode</th>
                 <th>Amount</th>
             </tr>
         </thead>
@@ -58,11 +57,10 @@
                 <!-- Loop through and display transaction history items -->
                 {% for transaction in transactions %}
                 <tr>
-                    <td>{{ transaction.date }}</td>
+                    <td>{{ transaction.date.strftime("%d-%m-%Y") }}</td>
                     <td>{{ transaction.cashflow }}</td>
-                    <td>{{ transaction.category }}</td>
-                    <td>{{ transaction.mode }}</td>
-                    <td>{{ transaction.amount }}</td>
+                    <td>{{ transaction.category.name }}</td>
+                    <td>₦ {{ "{:,.2f}".format(transaction.amount) }}</td>
                 </tr>
                 {% endfor %}
             {% else %}

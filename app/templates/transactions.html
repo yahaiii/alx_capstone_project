@@ -40,7 +40,7 @@
                             <td>{{ transaction.category.name }}</td>
                             <td>{{ transaction.mode }}</td>
                             <td>{{ transaction.comment }}</td>
-                            <td>${{ transaction.amount }}</td>
+                            <td>₦ {{ "{:,.2f}".format(transaction.amount) }}</td>
                             <td>
                                 <!-- Edit Transaction -->
                                 <a href="{{ url_for('transactions.edit_transaction', transaction_id=transaction.id) }}" class="button">Edit</a>
@@ -58,11 +58,11 @@
             <!-- Pagination -->
             <div class="pagination">
                 {% if transactions.has_prev %}
-                    <a href="{{ url_for('dashboard.transaction_history', page=transactions.prev_num, search=request.args.get('search', '')) }}" class="button">Previous</a>
+                    <a href="{{ url_for('transactions.transaction_history', page=transactions.prev_num, search=request.args.get('search', '')) }}" class="button">Previous</a>
                 {% endif %}
                 <span class="page-number">Page {{ transactions.page }} of {{ transactions.pages }}</span>
                 {% if transactions.has_next %}
-                    <a href="{{ url_for('dashboard.transaction_history', page=transactions.next_num, search=request.args.get('search', '')) }}" class="button">Next</a>
+                    <a href="{{ url_for('transactions.transaction_history', page=transactions.next_num, search=request.args.get('search', '')) }}" class="button">Next</a>
                 {% endif %}
             </div>
         {% else %}
