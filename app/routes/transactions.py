@@ -10,6 +10,9 @@ transactions_bp = Blueprint('transactions', __name__)
 @transactions_bp.route('/transactions', methods=['GET'])
 @login_required
 def transaction_history():
+    # Retrieve the flash message from the session if available
+    message = flash('success')
+
     # Retrieve and display the transaction history for the current user
     transactions = Transaction.query.filter_by(user_id=current_user.id).all()
     return render_template('transactions.html', transactions=transactions)
@@ -36,7 +39,7 @@ def add_transaction():
             amount=form.amount.data,
             user=current_user 
         )
-        
+
         db.session.add(transaction) 
         db.session.commit()
         flash('Transaction added successfully', 'success')
@@ -49,22 +52,38 @@ def add_transaction():
 def edit_transaction(transaction_id):
     # Retrieve the transaction to edit
     transaction = Transaction.query.get_or_404(transaction_id)
-    
+
     # Check if the current user owns the transaction
     if transaction.user != current_user:
         flash("You don't have permission to edit this transaction.", 'error')
         return redirect(url_for('transactions.transaction_history'))
-    
-    form = TransactionForm(obj=transaction)
-    
+
+    form = TransactionForm(request.form, obj=transaction)
+
+    # Fetch categories from the Category model
+    categories = Category.query.all()
+    category_choices = [(str(category.id), category.name) for category in categories]
+
+    # Set the choices for the category field in the form
+    form.category.choices = category_choices
+
     if form.validate_on_submit():
-        # Update the transaction with the new data
-        form.populate_obj(transaction)
+        # Manually update the transaction with the new data
+        transaction.date = form.date.data
+        transaction.cashflow = form.cashflow.data
+        transaction.comment = form.comment.data
+        transaction.amount = form.amount.data
+        transaction.category_id = form.category.data
+        transaction.mode = form.mode.data
+        
         db.session.commit()
         flash('Transaction updated successfully', 'success')
         return redirect(url_for('transactions.transaction_history'))
-    
+
+
     return render_template('edit_transaction.html', form=form, transaction=transaction)
+
+
 
 @transactions_bp.route('/delete_transaction/<int:transaction_id>', methods=['POST'])
 @login_required
