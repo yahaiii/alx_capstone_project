@@ -26696,3 +26696,9 @@ pre[class*="language-"] {
 }
 
 /*# sourceMappingURL=dashboard-free.css.map */
+
+/* Addendum */
+img.landing-logo {
+  width: 17em;
+  margin-bottom: 4em;
+}

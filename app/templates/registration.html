@@ -3,57 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration | Breadcrumbs</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <!-- favicons -->
+  <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='img/favicon.png') }}">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}">
+  
+    <title>Sign Up | Breadcrumbs</title>
+    <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <!-- Nucleo Icons -->
+  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  
+  <!-- CSS Files -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/soft-ui-dashboard.css') }}">
 </head>
 <body>
-    <!-- Add this block to display flash messages -->
-    <div class="flash-messages">
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <ul class="messages">
-                    {% for message in messages %}
-                        <li>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        {% endwith %}
-    </div>
 
-    <div class="registration-container">
-        <h2 class="registration-title">Sign Up</h2>
-        <form class="registration-form" method="POST">
-            {{ form.hidden_tag() }}
-            <div class="form-group">
-                {{ form.username.label(class="form-label") }}
-                {{ form.username(class="form-input") }}
-            </div>
-            <div class="form-group">
-                {{ form.first_name.label(class="form-label") }}
-                {{ form.first_name(class="form-input") }}
-            </div>
-            <div class="form-group">
-                {{ form.last_name.label(class="form-label") }}
-                {{ form.last_name(class="form-input") }}
-            </div>
-            <div class="form-group">
-                {{ form.email.label(class="form-label") }}
-                {{ form.email(class="form-input") }}
-            </div>
-            <div class="form-group">
-                {{ form.password.label(class="form-label") }}
-                {{ form.password(class="form-input") }}
-            </div>
-            <div class="form-group">
-                {{ form.confirm_password.label(class="form-label") }}
-                {{ form.confirm_password(class="form-input") }}
-            </div>
-            <div class="form-group">
-                {{ form.submit(class="btn-primary") }}
-            </div>
-        </form>
+<div class="main-content mt-0">
+    <section class="min-vh-100 mb-8">
+        <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg"
+             style="background-image: url('../static/img/curved-images/white-curved.jpg');">
+            <span class="mask bg-gradient-dark opacity-6"></span>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-5 text-center mx-auto">
+                        <h1 class="text-white mb-2 mt-5">Welcome to</h1>
+                        <img src="{{ url_for('static', filename='img/breadcrumbs_logo.png') }}" alt="Breadcrumbs Logo" class="landing-logo">
+                        <p class="text-lead text-white">Experience an easily organized financial life.</p>
+                    </div>
+                </div>
 
-        <p>Already registered? <a href="/login">Login</a></p>
-    </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row mt-lg-n10 mt-md-n11 mt-n10">
+                <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
+                    <div class="card z-index-0">
+                        <div class="card-body">
+                            <form role="form text-left" method="POST">
+                                {{ form.hidden_tag() }}
+                                  {% with messages = get_flashed_messages() %}
+                                    {% if messages %}
+                                      <div style="color: red;">
+                                        {% for message in messages %}
+                                          {{ message }}
+                                        {% endfor %}
+                                        Error Occurred
+                                      </div>
+                                    {% endif %}
+                                {% endwith %}
+                                <div class="mb-3">
+                                    {{ form.username.label(class="form-label", aria_label="Name") }}
+                                    {{ form.username(class="form-control", placeholder="Username", aria_label="Username", aria_describedby="username-addon") }}
+                                </div>
+
+                                <div class="mb-3">
+                                  {{ form.first_name.label(class="form-label", aria_label="First Name") }}
+                                  {{ form.first_name(class="form-control", placeholder="First Name", aria_label="First Name", aria_describedby="first-name-addon") }}
+                              </div>
+
+                              <div class="mb-3">
+                                  {{ form.last_name.label(class="form-label", aria_label="Last Name") }}
+                                  {{ form.last_name(class="form-control", placeholder="Last Name", aria_label="Last Name", aria_describedby="last-name-addon") }}
+                              </div>
+
+                                <div class="mb-3">
+                                    {{ form.email.label(class="form-label", aria_label="Email") }}
+                                    {{ form.email(class="form-control", placeholder="Email", aria_label="Email", aria_describedby="email-addon") }}
+                                </div>
+
+                                <div class="mb-3">
+                                    {{ form.password.label(class="form-label", aria_label="Password") }}
+                                    {{ form.password(class="form-control", placeholder="Password", aria_label="Password", aria_describedby="password-addon") }}
+                                </div>
+
+                                <div class="mb-3">
+                                    {{ form.confirm_password.label(class="form-label", aria_label="Confirm Password") }}
+                                    {{ form.confirm_password(class="form-control", placeholder="Confirm Password", aria_label="Confirm Password", aria_describedby="confirm-password-addon") }}
+                                </div>
+
+                                <div class="form-check form-check-info text-left">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        I agree the <a href="javascript:;" class="text-dark font-weight-bolder">Terms and Conditions</a>
+                                    </label>
+                                </div>
+                                <div class="text-center">
+                                    {{ form.submit(class="btn bg-gradient-dark w-100 my-4 mb-2", type="submit") }}
+                                </div>
+                                <p class="text-sm mt-3 mb-0">Already have an account? <a href="/login"
+                                                                                      class="text-dark font-weight-bolder">Sign
+                                    in</a></p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
 </body>
 </html>
