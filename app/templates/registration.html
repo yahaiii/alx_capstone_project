@@ -12,11 +12,12 @@
     <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
-  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="../static/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="../static/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="../static/css/nucleo-svg.css" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="../static/css/nucleo-svg.css" rel="stylesheet" />
   
   <!-- CSS Files -->
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/soft-ui-dashboard.css') }}">
@@ -46,16 +47,25 @@
                         <div class="card-body">
                             <form role="form text-left" method="POST">
                                 {{ form.hidden_tag() }}
-                                  {% with messages = get_flashed_messages() %}
+                                {% with messages = get_flashed_messages() %}
                                     {% if messages %}
-                                      <div style="color: red;">
-                                        {% for message in messages %}
-                                          {{ message }}
-                                        {% endfor %}
-                                        Error Occurred
-                                      </div>
+                                        {% set message = messages[-1] %}
+                                        {% if "error" in message %}
+                                            <div class="alert alert-danger">
+                                                {{ message }}
+                                            </div>
+                                        {% elif "success" in message %}
+                                            <div class="alert alert-success">
+                                                {{ message }}
+                                            </div>
+                                        {% else %}
+                                            <div class="alert alert-info">
+                                                {{ message }}
+                                            </div>
+                                        {% endif %}
                                     {% endif %}
                                 {% endwith %}
+
                                 <div class="mb-3">
                                     {{ form.username.label(class="form-label", aria_label="Name") }}
                                     {{ form.username(class="form-control", placeholder="Username", aria_label="Username", aria_describedby="username-addon") }}

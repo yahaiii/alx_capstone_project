@@ -10,15 +10,15 @@ dashboard_bp = Blueprint('dashboard', __name__)
 @dashboard_bp.route('/dashboard', methods=['GET'])
 @login_required
 def dashboard():
-    # Implement logic for spending vs goal visualizations and income vs expenses visualizations
-    # You can use a data visualization library (e.g., Plotly) to create the charts
+    # Query transactions for the current user
+    transactions = Transaction.query.filter_by(user_id=current_user.id).all()
 
-    # Query transactions and paginate the results
-    page = request.args.get('page', 1, type=int)
-    per_page = 10  # Adjust the number of items per page as needed
-    transactions = Transaction.query.filter_by(user_id=current_user.id).paginate()
+    # Calculate total income, total expenses, and account balance
+    total_income = sum(transaction.amount for transaction in transactions if transaction.cashflow == 'income')
+    total_expenses = sum(transaction.amount for transaction in transactions if transaction.cashflow == 'expense')
+    account_balance = total_income - total_expenses
 
-    return render_template('dashboard.html', transactions=transactions)
+    return render_template('dashboard.html', transactions=transactions, total_income=total_income, total_expenses=total_expenses, account_balance=account_balance)
 
 @dashboard_bp.route('/transactions', methods=['GET'])
 @login_required

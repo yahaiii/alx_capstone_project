@@ -50,10 +50,17 @@ def register():
                 db.session.commit()
 
                 flash('Your account has been created! You can now log in.', 'success')
+
+                # Debug prints here
+                print(f"Flash messages: {get_flashed_messages()}")
+
                 return redirect(url_for('auth.login'))
 
         except Exception as e:
             flash('An error occurred during registration. Please try again later.', 'danger')
+
+            # Debug prints here
+            print(f"Flash messages: {get_flashed_messages()}")
 
     return render_template('registration.html', form=form)
 
@@ -66,7 +73,9 @@ def login():
 
     if form.validate_on_submit():
 
-        print("Debug: Form submitted check passed")
+        print("Form submitted")
+        print("Username:", form.username.data)
+        print("Password:", form.password.data)
         # Form submission
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
@@ -74,8 +83,10 @@ def login():
             flash('Invalid username or password', 'danger')
             print("Debug: Flash message set")
             return redirect(url_for('auth.login'))
-
-        login_user(user)  # Log the user in
+        
+        print("Debug: Form submitted check passed")
+        # Log the user in
+        login_user(user)
 
         # Redirect to the 'next' page if provided, or to a default page
         next_page = request.args.get('next')
