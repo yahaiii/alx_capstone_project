@@ -33,6 +33,7 @@ def create_app(config_filename='config.py'):
     from app.routes.landing import landing_bp
     from app.routes.settings import settings_bp
     from app.routes.transactions import transactions_bp
+    from app.routes.reports import reports_bp
     
 
     # Register the blueprints
@@ -41,5 +42,6 @@ def create_app(config_filename='config.py'):
     app.register_blueprint(landing_bp)
     app.register_blueprint(settings_bp)
     app.register_blueprint(transactions_bp)
+    app.register_blueprint(reports_bp)
 
     return app
