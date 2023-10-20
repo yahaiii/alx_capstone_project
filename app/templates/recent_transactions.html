@@ -1,0 +1,36 @@
+<ul class="list-group">
+    {% for transaction in transactions %}
+    <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+        <div class="d-flex align-items-center">
+            <button class="btn btn-icon-only btn-rounded
+                {% if transaction.cashflow == 'income' %}
+                    btn-outline-success mb-0 me-3
+                {% else %}
+                    btn-outline-danger mb-0 me-3
+                {% endif %}
+                btn-sm d-flex align-items-center justify-content-center">
+                <i class="fas
+                    {% if transaction.cashflow == 'income' %}
+                        fa-arrow-up
+                    {% else %}
+                        fa-arrow-down
+                    {% endif %}
+                "></i>
+            </button>
+            <div class="d-flex flex-column">
+                <h6 class="mb-1 text-dark text-sm">{{ transaction.comment }}</h6>
+                <span class="text-xs">{{ transaction.date }}</span>
+            </div>
+        </div>
+        <div class="d-flex align-items-center
+            {% if transaction.cashflow == 'income' %}
+                text-success
+            {% else %}
+                text-danger
+            {% endif %}
+            text-gradient text-sm font-weight-bold">
+            {{ transaction.amount }}
+        </div>
+    </li>
+    {% endfor %}
+ </ul>
