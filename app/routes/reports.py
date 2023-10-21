@@ -22,10 +22,10 @@ def download_transactions_pdf():
     }
 
     # Set the path to wkhtmltopdf executable in the configuration in Windows
-    config = pdfkit.configuration(wkhtmltopdf=r'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe')
+    # config = pdfkit.configuration(wkhtmltopdf=r'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe')
 
     # Set the path to wkhtmltopdf executable on Ubuntu
-    # config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
+    config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
     # REMEMBER to:
     # sudo apt-get update
     # sudo apt-get install wkhtmltopdf
