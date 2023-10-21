@@ -1,24 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Breadcrumbs landing page</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>Breadcrumbs Landing</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}"> -->
+    <style>
+        /* Custom CSS styles */
+        .landing-container {
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .landing-logo {
+            max-width: 200px;
+            margin-top: 20px;
+        }
+
+        .landing-heading {
+            font-size: 2rem;
+            margin-top: 20px;
+        }
+
+        .landing-subheading {
+            font-size: 1.5rem;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <div class="container landing-container">
-        
         <div>
-            
-
-            <h1>Welcome to </h1> 
             <img src="{{ url_for('static', filename='img/breadcrumbs_logo_black.png') }}" alt="Breadcrumbs Logo" class="landing-logo">
-
-            <h2>Experience an easy, well organized and healthy financial life!</h2>
         </div>
-        
         <div>
-            <a href="{{ url_for('auth.register') }}" class="btn">Register</a>
+            <h1 class="landing-heading">Welcome to Breadcrumbs</h1>
+            <p class="landing-subheading">Experience an easy, well-organized, and healthy financial life!</p>
+            <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-lg">Get Started</a>
         </div>
     </div>
+
+    <!-- Include Bootstrap JavaScript and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

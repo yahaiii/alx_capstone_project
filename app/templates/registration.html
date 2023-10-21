@@ -24,97 +24,168 @@
 </head>
 <body>
 
-<div class="main-content mt-0">
-    <section class="min-vh-100 mb-8">
-        <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg"
-             style="background-image: url('../static/img/curved-images/white-curved.jpg');">
-            <span class="mask bg-gradient-dark opacity-6"></span>
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-5 text-center mx-auto">
-                        <h1 class="text-white mb-2 mt-5">Welcome to</h1>
-                        <img src="{{ url_for('static', filename='img/breadcrumbs_logo.png') }}" alt="Breadcrumbs Logo" class="landing-logo">
-                        <p class="text-lead text-white">Experience an easily organized financial life.</p>
-                    </div>
+    <div class="main-content mt-0">
+        <section class="min-vh-100 mb-8">
+            <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg"
+                style="background-image: url('../static/img/curved-images/white-curved.jpg');">
+                <span class="mask bg-gradient-dark opacity-6"></span>
+                <div class="container">
+                    <!-- ... (your existing header content) ... -->
                 </div>
-
             </div>
-        </div>
-        <div class="container">
-            <div class="row mt-lg-n10 mt-md-n11 mt-n10">
-                <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
-                    <div class="card z-index-0">
-                        <div class="card-body">
-                            <form role="form text-left" method="POST">
-                                {{ form.hidden_tag() }}
-                                {% with messages = get_flashed_messages() %}
-                                    {% if messages %}
-                                        {% set message = messages[-1] %}
-                                        {% if "error" in message %}
-                                            <div class="alert alert-danger">
-                                                {{ message }}
-                                            </div>
-                                        {% elif "success" in message %}
-                                            <div class="alert alert-success">
-                                                {{ message }}
-                                            </div>
-                                        {% else %}
-                                            <div class="alert alert-info">
-                                                {{ message }}
-                                            </div>
+            <div class="container">
+                <div class="row mt-lg-n10 mt-md-n11 mt-n10">
+                    <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
+                        <div class="card z-index-0">
+                            <div class="card-body">
+                                <form role="form text-left" method="POST" id="registration-form">
+                                    {{ form.hidden_tag() }}
+                                    {% with messages = get_flashed_messages() %}
+                                        {% if messages %}
+                                            {% set message = messages[-1] %}
+                                            {% if "error" in message %}
+                                                <div class="alert alert-danger">
+                                                    {{ message }}
+                                                </div>
+                                            {% elif "success" in message %}
+                                                <div class="alert alert-success">
+                                                    {{ message }}
+                                                </div>
+                                            {% else %}
+                                                <div class="alert alert-info">
+                                                    {{ message }}
+                                                </div>
+                                            {% endif %}
                                         {% endif %}
-                                    {% endif %}
-                                {% endwith %}
+                                    {% endwith %}
+    
+                                    <!-- Username -->
+                                    <div class="mb-3">
+                                        {{ form.username.label(class="form-label", aria_label="Name") }}
+                                        {{ form.username(class="form-control", placeholder="Username", id="username") }}
+                                        <div id="username-validation" class="invalid-feedback">
+                                            <!-- Validation message will appear here -->
+                                        </div>
+                                    </div>
 
-                                <div class="mb-3">
-                                    {{ form.username.label(class="form-label", aria_label="Name") }}
-                                    {{ form.username(class="form-control", placeholder="Username", aria_label="Username", aria_describedby="username-addon") }}
-                                </div>
+                                    <!-- First Name -->
+                                    <div class="mb-3">
+                                        {{ form.first_name.label(class="form-label", aria_label="First Name") }}
+                                        {{ form.first_name(class="form-control", placeholder="First Name", id="first-name") }}
+                                        <div id="first-name-validation" class="invalid-feedback">
+                                            <!-- Validation message will appear here -->
+                                        </div>
+                                    </div>
 
-                                <div class="mb-3">
-                                  {{ form.first_name.label(class="form-label", aria_label="First Name") }}
-                                  {{ form.first_name(class="form-control", placeholder="First Name", aria_label="First Name", aria_describedby="first-name-addon") }}
-                              </div>
+                                    <!-- Last Name -->
+                                    <div class="mb-3">
+                                        {{ form.last_name.label(class="form-label", aria_label="Last Name") }}
+                                        {{ form.last_name(class="form-control", placeholder="Last Name", id="last-name") }}
+                                        <div id="last-name-validation" class="invalid-feedback">
+                                            <!-- Validation message will appear here -->
+                                        </div>
+                                    </div>
 
-                              <div class="mb-3">
-                                  {{ form.last_name.label(class="form-label", aria_label="Last Name") }}
-                                  {{ form.last_name(class="form-control", placeholder="Last Name", aria_label="Last Name", aria_describedby="last-name-addon") }}
-                              </div>
+                                    <!-- Email -->
+                                    <div class="mb-3">
+                                        {{ form.email.label(class="form-label", aria_label="Email") }}
+                                        {{ form.email(class="form-control", placeholder="Email", id="email", aria_label="Email", aria_describedby="email-validation") }}
+                                        <div id="email-validation" class="invalid-feedback">
+                                            <!-- Validation message will appear here -->
+                                        </div>
+                                    </div>
 
-                                <div class="mb-3">
-                                    {{ form.email.label(class="form-label", aria_label="Email") }}
-                                    {{ form.email(class="form-control", placeholder="Email", aria_label="Email", aria_describedby="email-addon") }}
-                                </div>
+                                    <!-- Password -->
+                                    <div class="mb-3">
+                                        {{ form.password.label(class="form-label", aria_label="Password") }}
+                                        {{ form.password(class="form-control", placeholder="Password", id="password", aria_label="Password", aria_describedby="password-validation") }}
+                                        <div id="password-validation" class="invalid-feedback">
+                                            <!-- Validation message will appear here -->
+                                        </div>
+                                    </div>
 
-                                <div class="mb-3">
-                                    {{ form.password.label(class="form-label", aria_label="Password") }}
-                                    {{ form.password(class="form-control", placeholder="Password", aria_label="Password", aria_describedby="password-addon") }}
-                                </div>
+                                    <!-- Confirm Password -->
+                                    <div class="mb-3">
+                                        {{ form.confirm_password.label(class="form-label", aria_label="Confirm Password") }}
+                                        {{ form.confirm_password(class="form-control", placeholder="Confirm Password", id="confirm-password",aria_label="Confirm Password", aria_describedby="confirm-password-validation") }}
+                                        <div id="confirm-password-validation" class="invalid-feedback">
+                                            <!-- Validation message will appear here -->
+                                        </div>
+                                    </div>
 
-                                <div class="mb-3">
-                                    {{ form.confirm_password.label(class="form-label", aria_label="Confirm Password") }}
-                                    {{ form.confirm_password(class="form-control", placeholder="Confirm Password", aria_label="Confirm Password", aria_describedby="confirm-password-addon") }}
-                                </div>
-
-                                <div class="form-check form-check-info text-left">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                        I agree the <a href="javascript:;" class="text-dark font-weight-bolder">Terms and Conditions</a>
-                                    </label>
-                                </div>
-                                <div class="text-center">
-                                    {{ form.submit(class="btn bg-gradient-dark w-100 my-4 mb-2", type="submit") }}
-                                </div>
-                                <p class="text-sm mt-3 mb-0">Already have an account? <a href="/login"
-                                                                                      class="text-dark font-weight-bolder">Sign
-                                    in</a></p>
-                            </form>
+    
+                                    <div class="form-check form-check-info text-left">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            I agree to the <a href="javascript:;" class="text-dark font-weight-bolder">Terms and Conditions</a>
+                                        </label>
+                                    </div>
+                                    <div class="text-center">
+                                        {{ form.submit(class="btn bg-gradient-dark w-100 my-4 mb-2", type="submit") }}
+                                    </div>
+                                    <p class="text-sm mt-3 mb-0">Already have an account? <a href="/login"
+                                                                        class="text-dark font-weight-bolder">Sign
+                                        in</a></p>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-</div>
+        </section>
+    </div>
+    <script>
+        // Real-time form validation using JavaScript
+        const registrationForm = document.getElementById('registration-form');
+    
+        // Helper function to display validation messages
+        function displayValidationMessage(input, message) {
+            const validationMessage = input.nextElementSibling;
+            if (message) {
+                validationMessage.textContent = message;
+                input.setCustomValidity(message);
+            } else {
+                validationMessage.textContent = '';
+                input.setCustomValidity('');
+            }
+        }
+    
+        // Helper function to validate an input
+        function validateInput(input) {
+            switch (input.id) {
+                case 'username':
+                    displayValidationMessage(input, new RegExp('^[a-zA-Z0-9_]{6,}$').test(input.value) ? '' : 'Username must be at least 6 characters and contain only letters, numbers, or underscores.');
+                    break;
+                case 'first-name':
+                    displayValidationMessage(input, new RegExp('^[a-zA-Z]{2,}$').test(input.value) ? '' : 'First name must be at least 2 characters and contain only letters.');
+                    break;
+                case 'last-name':
+                    displayValidationMessage(input, new RegExp('^[a-zA-Z]{2,}$').test(input.value) ? '' : 'Last name must be at least 2 characters and contain only letters.');
+                    break;
+                case 'email':
+                    displayValidationMessage(input, new RegExp('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$').test(input.value) ? '' : 'Invalid email format.');
+                    break;
+                case 'password':
+                    displayValidationMessage(input, input.value.length >= 6 ? '' : 'Password must be at least 6 characters.');
+                    break;
+                case 'confirm-password':
+                    const passwordInput = document.getElementById('password');
+                    if (input.value !== passwordInput.value) {
+                        displayValidationMessage(input, 'Passwords do not match.');
+                    } else {
+                        displayValidationMessage(input, '');
+                    }
+                    break;
+            }
+        }
+    
+        // Listen for input events on each input field
+        const inputs = registrationForm.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('input', function (event) {
+                validateInput(input);
+            });
+        });
+    </script>   
 </body>
 </html>

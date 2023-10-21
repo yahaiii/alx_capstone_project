@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, DateField, SubmitField, DecimalField, ValidationError
+from wtforms import StringField, PasswordField, DateField, SubmitField, DecimalField, SelectField, ValidationError
 from wtforms.validators import InputRequired, Email, Length, DataRequired, EqualTo
 
 class AccountSettingsForm(FlaskForm):
@@ -20,9 +20,10 @@ class ChangePasswordForm(FlaskForm):
     submit = SubmitField('Change Password')
 
 class SetGoalsForm(FlaskForm):
-    spending_limit = DecimalField('Spending Limit', places=2, validators=[InputRequired()])
-    income_goal = DecimalField('Income Goal', places=2, validators=[InputRequired()])
-    submit = SubmitField('Set Goals')
+    name = StringField('Name', validators=[InputRequired(), Length(max=100)])
+    goal_type = SelectField('Goal Type', choices=[('Savings', 'Savings'), ('Investment', 'Investment')], validators=[InputRequired()])
+    target_amount = DecimalField('Target Amount', places=2, validators=[InputRequired()])
+    submit = SubmitField('Set Goal')
 
     # Custom validation for the fields, e.g., ensuring positive values
     def validate_spending_limit(form, field):

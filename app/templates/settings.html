@@ -7,24 +7,45 @@
     <h1>User Settings</h1>
 
     <h2>Profile Settings</h2>
+    <div class="error-messages">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% set message = messages[-1] %}
+                {% if "error" in message %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+                {% elif "success" in message %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+                {% else %}
+                <div class="alert alert-info">
+                    {{ message }}
+                </div>
+                {% endif %}
+            {% endif %}
+        {% endwith %}
+    </div>
     <div class="card mb-4">
         <div class="card-header">
             Profile Settings
         </div>
         <div class="card-body">
+            <!-- Profile Settings Form -->
             <form method="post" action="{{ url_for('settings.user_settings') }}">
                 {{ profile_form.hidden_tag() }}
                 <div class="form-group">
                     {{ profile_form.first_name.label(class="form-control-label") }}
-                    {{ profile_form.first_name(class="form-control") }}
+                    {{ profile_form.first_name(class="form-control", data=current_user.first_name) }}
                 </div>
                 <div class="form-group">
                     {{ profile_form.last_name.label(class="form-control-label") }}
-                    {{ profile_form.last_name(class="form-control") }}
+                    {{ profile_form.last_name(class="form-control", data=current_user.last_name) }}
                 </div>
                 <div class="form-group">
                     {{ profile_form.date_of_birth.label(class="form-control-label") }}
-                    {{ profile_form.date_of_birth(class="form-control") }}
+                    {{ profile_form.date_of_birth(class="form-control", data=current_user.date_of_birth) }}
                 </div>
                 {{ profile_form.submit(class="btn btn-primary mt-3") }}
             </form>
@@ -86,12 +107,16 @@
             <form method="post" action="{{ url_for('settings.user_settings') }}">
                 {{ goals_form.hidden_tag() }}
                 <div class="form-group">
-                    {{ goals_form.spending_limit.label(class="form-control-label") }}
-                    {{ goals_form.spending_limit(class="form-control") }}
+                    {{ goals_form.name.label(class="form-control-label") }}
+                    {{ goals_form.name(class="form-control") }}
                 </div>
                 <div class="form-group">
-                    {{ goals_form.income_goal.label(class="form-control-label") }}
-                    {{ goals_form.income_goal(class="form-control") }}
+                    {{ goals_form.goal_type.label(class="form-control-label") }}
+                    {{ goals_form.goal_type(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ goals_form.target_amount.label(class="form-control-label") }}
+                    {{ goals_form.target_amount(class="form-control") }}
                 </div>
                 {{ goals_form.submit(class="btn btn-primary mt-3") }}
             </form>
