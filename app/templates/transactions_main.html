@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- Transactions Page -->
+    <section class="dashboard-section">
+        <h2>Transaction History</h2>
+
+        {% if flash_message %}
+            <div class="flash-message">{{ flash_message }}</div>
+        {% endif %}
+        
+        <div class="row mb-4">
+            <!-- Search Bar -->
+            <div class="col-md-6">
+                <form method="get" action="{{ url_for('transactions.transaction_history') }}" class="mb-3">
+                    <div class="input-group">
+                        <input type="text" name="search" id="transaction-search" class="form-control" placeholder="Search for transactions..." value="{{ request.args.get('search', '') }}">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </form>
+            </div>
+            <!-- Button to add a new transaction -->
+            <div class="col-md-6 text-end">
+                <a href="{{ url_for('transactions.add_transaction') }}" class="btn btn-primary">Add Transaction</a>
+            </div>
+        </div>
+        
+        {% if transactions %}
+            <!-- Transaction History Table -->
+            <div class="table-responsive p-0">
+                <table class="table align-items-center justify-content-center mb-0">
+                    <thead>
+                        <tr>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cashflow</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Category</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mode</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7">Comment</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for transaction in transactions %}
+                            <tr>
+                                <td>{{ transaction.date.strftime("%d-%m-%Y") }}</td>
+                                <td>{{ transaction.cashflow }}</td>
+                                <td>{{ transaction.category.name }}</td>
+                                <td>{{ transaction.mode }}</td>
+                                <td>{{ transaction.comment }}</td>
+                                <td>
+                                    <!-- Edit Transaction -->
+                                    <a href="{{ url_for('transactions.edit_transaction', transaction_id=transaction.id) }}" class="btn btn-link text-secondary mb-0">
+                                        <i class="fa fa-edit text-xs"></i>
+                                    </a>
+                                    <!-- Delete Transaction -->
+                                    <form method="post" action="{{ url_for('transactions.delete_transaction', transaction_id=transaction.id) }}">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <button type="submit" class="btn btn-link text-secondary mb-0">
+                                            <i class="fa fa-trash text-xs"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        
+            <!-- Pagination -->
+            <div class="pagination">
+                {% if transactions.has_prev %}
+                    <a href="{{ url_for('transactions.transaction_history', page=transactions.prev_num, search=request.args.get('search', '')) }}" class="btn btn-primary">Previous</a>
+                {% endif %}
+                <span class="page-number">Page {{ transactions.page }} of {{ transactions.pages }}</span>
+                {% if transactions.has_next %}
+                    <a href="{{ url_for('transactions.transaction_history', page=transactions.next_num, search=request.args.get('search', '')) }}" class="btn btn-primary">Next</a>
+                {% endif %}
+            </div>
+        {% else %}
+            <p>No transactions found.</p>
+        {% endif %}
+    </section>
+{% endblock %}

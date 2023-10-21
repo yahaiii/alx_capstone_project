@@ -1,72 +1,305 @@
 {% extends "base.html" %}
+{% block title %}Breadcrumbs | Transactions{% endblock %}
+{% block nav_title %}Transactions{% endblock %}
+{% set page = 'transactions' %}
 
 {% block content %}
     <!-- Transactions Page -->
-    <section class="dashboard-section">
-        <h2>Transaction History</h2>
-
-        {% if flash_message %}
-            <div class="flash-message">{{ flash_message }}</div>
-        {% endif %}
-
-        
-        <!-- Search Bar -->
-        <form method="get" action="{{ url_for('transactions.transaction_history') }}">
-            <input type="text" name="search" id="transaction-search" placeholder="Search for transactions..." value="{{ request.args.get('search', '') }}">
-            <button type="submit">Search</button>
-        </form>
-        <!-- Button to add a new transaction -->
-        <a href="{{ url_for('transactions.add_transaction') }}" class="button">Add Transaction</a>
-        
-        {% if transactions %}
-            <!-- Transaction History Table -->
-            <table>
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Cashflow</th>
-                        <th>Category</th>
-                        <th>Mode</th>
-                        <th>Comment</th>
-                        <th>Amount</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for transaction in transactions %}
+    <div class="container-fluid py-4">
+        <div class="row">
+          <div class="col-12">
+            <div class="card mb-4">
+              <div class="card-header pb-0">
+                <h6>Transaction History</h6>
+                {% if flash_message %}
+                    <div class="flash-message">{{ flash_message }}</div>
+                {% endif %}
+              </div>
+              <div class="card-body px-0 pt-0 pb-2">
+                <div class="row mb-4 text-end" style="margin: 0 1.5em;">
+                    <!-- Button to add a new transaction -->
+                    <div>
+                        <a href="{{ url_for('transactions.add_transaction') }}" class="btn btn-primary">Add Transaction</a>
+                    </div>
+                </div>
+                {% if transactions %}
+                <div class="table-responsive p-0">
+                  <table class="table align-items-center mb-0">
+                    <thead>
                         <tr>
-                            <td>{{ transaction.date.strftime("%d-%m-%Y") }}</td>
-                            <td>{{ transaction.cashflow }}</td>
-                            <td>{{ transaction.category.name }}</td>
-                            <td>{{ transaction.mode }}</td>
-                            <td>{{ transaction.comment }}</td>
-                            <td>₦ {{ "{:,.2f}".format(transaction.amount) }}</td>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cashflow</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Category</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mode</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7">Comment</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for transaction in transactions %}
+                        <tr>
                             <td>
+                                <div class="d-flex px-2"><p class="text-sm font-weight-bold mb-0">{{ transaction.date.strftime("%d-%m-%Y") }}</p>
+                                </div>
+                            </td>
+                            <td><p class="text-sm font-weight-bold mb-0">{{ transaction.cashflow }}</p></td>
+                            <td><p class="text-sm font-weight-bold mb-0">{{ transaction.category.name }}</p></td>
+                            <td><p class="text-sm font-weight-bold mb-0">{{ transaction.mode }}</p></td>
+                            <td class="align-middle text-center"><p class="text-sm font-weight-bold mb-0">{{ transaction.comment }}</p></td>
+                            <td class="align-middle text-center">
                                 <!-- Edit Transaction -->
-                                <a href="{{ url_for('transactions.edit_transaction', transaction_id=transaction.id) }}" class="button">Edit</a>
+                                <a href="{{ url_for('transactions.edit_transaction', transaction_id=transaction.id) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit Transaction">
+                                    <i class="fa fa-edit text-xs mb-3 ms-3"></i>
+                                </a>
                                 <!-- Delete Transaction -->
                                 <form method="post" action="{{ url_for('transactions.delete_transaction', transaction_id=transaction.id) }}">
                                     <input type="hidden" name="_method" value="DELETE">
-                                    <button type="submit" class="button">Delete</button>
+                                    <button style="background: none;
+                                    border: none;
+                                    padding: 0;
+                                    cursor: pointer;
+                                    font-size: inherit;
+                                    color: inherit;" type="submit" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Delete Transaction">
+                                        <i class="fa fa-trash text-xs mb-3 ms-3"></i>
+                                    </button>
                                 </form>
                             </td>
                         </tr>
                     {% endfor %}
-                </tbody>
-            </table>
-        
-            <!-- Pagination -->
-            <div class="pagination">
-                {% if transactions.has_prev %}
-                    <a href="{{ url_for('transactions.transaction_history', page=transactions.prev_num, search=request.args.get('search', '')) }}" class="button">Previous</a>
+                    </tbody>
+                  </table>
+                </div>
+                {% else %}
+                    <p>No transactions found.</p>
                 {% endif %}
-                <span class="page-number">Page {{ transactions.page }} of {{ transactions.pages }}</span>
-                {% if transactions.has_next %}
-                    <a href="{{ url_for('transactions.transaction_history', page=transactions.next_num, search=request.args.get('search', '')) }}" class="button">Next</a>
-                {% endif %}
+              </div>
             </div>
-        {% else %}
-            <p>No transactions found.</p>
-        {% endif %}
-    </section>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="card mb-4">
+              <div class="card-header pb-0">
+                <h6>Projects table</h6>
+              </div>
+              <div class="card-body px-0 pt-0 pb-2">
+                <div class="table-responsive p-0">
+                  <table class="table align-items-center justify-content-center mb-0">
+                    <thead>
+                      <tr>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Project</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Budget</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Completion</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="d-flex px-2">
+                            <div>
+                              <img src="../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm rounded-circle me-2" alt="spotify">
+                            </div>
+                            <div class="my-auto">
+                              <h6 class="mb-0 text-sm">Spotify</h6>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <p class="text-sm font-weight-bold mb-0">$2,500</p>
+                        </td>
+                        <td>
+                          <span class="text-xs font-weight-bold">working</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <div class="d-flex align-items-center justify-content-center">
+                            <span class="me-2 text-xs font-weight-bold">60%</span>
+                            <div>
+                              <div class="progress">
+                                <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td class="align-middle">
+                          <button class="btn btn-link text-secondary mb-0">
+                            <i class="fa fa-ellipsis-v text-xs"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="d-flex px-2">
+                            <div>
+                              <img src="../assets/img/small-logos/logo-invision.svg" class="avatar avatar-sm rounded-circle me-2" alt="invision">
+                            </div>
+                            <div class="my-auto">
+                              <h6 class="mb-0 text-sm">Invision</h6>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <p class="text-sm font-weight-bold mb-0">$5,000</p>
+                        </td>
+                        <td>
+                          <span class="text-xs font-weight-bold">done</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <div class="d-flex align-items-center justify-content-center">
+                            <span class="me-2 text-xs font-weight-bold">100%</span>
+                            <div>
+                              <div class="progress">
+                                <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td class="align-middle">
+                          <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-ellipsis-v text-xs"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="d-flex px-2">
+                            <div>
+                              <img src="../assets/img/small-logos/logo-jira.svg" class="avatar avatar-sm rounded-circle me-2" alt="jira">
+                            </div>
+                            <div class="my-auto">
+                              <h6 class="mb-0 text-sm">Jira</h6>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <p class="text-sm font-weight-bold mb-0">$3,400</p>
+                        </td>
+                        <td>
+                          <span class="text-xs font-weight-bold">canceled</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <div class="d-flex align-items-center justify-content-center">
+                            <span class="me-2 text-xs font-weight-bold">30%</span>
+                            <div>
+                              <div class="progress">
+                                <div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="30" style="width: 30%;"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td class="align-middle">
+                          <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-ellipsis-v text-xs"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="d-flex px-2">
+                            <div>
+                              <img src="../assets/img/small-logos/logo-slack.svg" class="avatar avatar-sm rounded-circle me-2" alt="slack">
+                            </div>
+                            <div class="my-auto">
+                              <h6 class="mb-0 text-sm">Slack</h6>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <p class="text-sm font-weight-bold mb-0">$1,000</p>
+                        </td>
+                        <td>
+                          <span class="text-xs font-weight-bold">canceled</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <div class="d-flex align-items-center justify-content-center">
+                            <span class="me-2 text-xs font-weight-bold">0%</span>
+                            <div>
+                              <div class="progress">
+                                <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0" style="width: 0%;"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td class="align-middle">
+                          <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-ellipsis-v text-xs"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="d-flex px-2">
+                            <div>
+                              <img src="../assets/img/small-logos/logo-webdev.svg" class="avatar avatar-sm rounded-circle me-2" alt="webdev">
+                            </div>
+                            <div class="my-auto">
+                              <h6 class="mb-0 text-sm">Webdev</h6>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <p class="text-sm font-weight-bold mb-0">$14,000</p>
+                        </td>
+                        <td>
+                          <span class="text-xs font-weight-bold">working</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <div class="d-flex align-items-center justify-content-center">
+                            <span class="me-2 text-xs font-weight-bold">80%</span>
+                            <div>
+                              <div class="progress">
+                                <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="80" style="width: 80%;"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td class="align-middle">
+                          <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-ellipsis-v text-xs"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="d-flex px-2">
+                            <div>
+                              <img src="../assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm rounded-circle me-2" alt="xd">
+                            </div>
+                            <div class="my-auto">
+                              <h6 class="mb-0 text-sm">Adobe XD</h6>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <p class="text-sm font-weight-bold mb-0">$2,300</p>
+                        </td>
+                        <td>
+                          <span class="text-xs font-weight-bold">done</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <div class="d-flex align-items-center justify-content-center">
+                            <span class="me-2 text-xs font-weight-bold">100%</span>
+                            <div>
+                              <div class="progress">
+                                <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td class="align-middle">
+                          <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-ellipsis-v text-xs"></i>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
 {% endblock %}
