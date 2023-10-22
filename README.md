@@ -143,7 +143,7 @@ This structured approach to directory organization within the `app/` directory u
 ![User Settings](wireframes/6-User-Settings.png)
 
 ## Demo:
-[Live Demo (Not yet ready)](#)
+[ Demo Video] (https://youtu.be/U9gDk2Utbqc)
 
 ## Roadmap and Future Enhancements:
 In the future, I plan to implement the following enhancements:

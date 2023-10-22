@@ -137,19 +137,40 @@
     <script>
         // Real-time form validation using JavaScript
         const registrationForm = document.getElementById('registration-form');
-    
+
         // Helper function to display validation messages
         function displayValidationMessage(input, message) {
             const validationMessage = input.nextElementSibling;
             if (message) {
                 validationMessage.textContent = message;
-                input.setCustomValidity(message);
+                validationMessage.style.display = 'block'; // Display the validation message
             } else {
                 validationMessage.textContent = '';
-                input.setCustomValidity('');
+                validationMessage.style.display = 'none'; // Hide the validation message
             }
         }
-    
+
+        // Helper function to validate the password input
+        function validatePassword(input) {
+            const password = input.value;
+            const lengthRegex = /.{8,}/; // At least 8 characters
+            const uppercaseRegex = /[A-Z]/; // At least one uppercase letter
+            const lowercaseRegex = /[a-z]/; // At least one lowercase letter
+            const digitRegex = /\d/; // At least one digit
+            const specialCharacterRegex = /[^A-Za-z0-9]/; // At least one special character
+
+            const isValid = 
+                lengthRegex.test(password) &&
+                uppercaseRegex.test(password) &&
+                lowercaseRegex.test(password) &&
+                digitRegex.test(password) &&
+                specialCharacterRegex.test(password);
+
+            displayValidationMessage(input, isValid ? '' : 'Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one digit and one special character.');
+
+            return isValid;
+        }
+
         // Helper function to validate an input
         function validateInput(input) {
             switch (input.id) {
@@ -165,8 +186,11 @@
                 case 'email':
                     displayValidationMessage(input, new RegExp('^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$').test(input.value) ? '' : 'Invalid email format.');
                     break;
-                case 'password':
-                    displayValidationMessage(input, input.value.length >= 6 ? '' : 'Password must be at least 6 characters.');
+                    case 'password':
+                    const isPasswordValid = validatePassword(input);
+                    if (isPasswordValid) {
+                        displayValidationMessage(input, '');
+                    }
                     break;
                 case 'confirm-password':
                     const passwordInput = document.getElementById('password');
@@ -178,11 +202,11 @@
                     break;
             }
         }
-    
+
         // Listen for input events on each input field
         const inputs = registrationForm.querySelectorAll('input');
         inputs.forEach(input => {
-            input.addEventListener('input', function (event) {
+            input.addEventListener('keyup', function (event) {
                 validateInput(input);
             });
         });
