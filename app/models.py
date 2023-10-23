@@ -48,6 +48,7 @@ class User(db.Model, UserMixin):
     insights = db.relationship('Insight', back_populates='user')
     notifications = db.relationship('Notification', back_populates='user')
     reports = db.relationship('Report', back_populates='user')
+    categories = db.relationship('Category', backref='user', lazy=True)
 
     def set_password(self, password):
         """
@@ -125,9 +126,11 @@ class Category(db.Model):
     """
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
+    spending_limit = db.Column(db.Float, default=0.0)
 
     # Relationships
     transactions = db.relationship('Transaction', back_populates='category')
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 class Budget(db.Model):
     """

@@ -6,7 +6,7 @@
 {% block content %}
     <h1>User Settings</h1>
 
-    <h2>Profile Settings</h2>
+    
     <div class="error-messages">
         {% with messages = get_flashed_messages() %}
             {% if messages %}
@@ -29,7 +29,7 @@
     </div>
     <div class="card mb-4">
         <div class="card-header">
-            Profile Settings
+            <h2>Profile Settings</h2>
         </div>
         <div class="card-body">
             <!-- Profile Settings Form -->
@@ -52,10 +52,10 @@
         </div>
     </div>
 
-    <h2>Account Settings</h2>
+    
     <div class="card mb-4">
         <div class="card-header">
-            Account Settings
+            <h2>Account Settings</h2>
         </div>
         <div class="card-body">
             <form method="post" action="{{ url_for('settings.user_settings') }}">
@@ -73,10 +73,10 @@
         </div>
     </div>
 
-    <h2>Change Password</h2>
+    
     <div class="card mb-4">
         <div class="card-header">
-            Change Password
+            <h2>Change Password</h2>
         </div>
         <div class="card-body">
             <form method="post" action="{{ url_for('settings.user_settings') }}">
@@ -98,28 +98,30 @@
         </div>
     </div>
 
-    <h2>Set Goals</h2>
+    
     <div class="card mb-4">
         <div class="card-header">
-            Set Goals
+            <h2>Set Spending Limits</h2>
         </div>
         <div class="card-body">
             <form method="post" action="{{ url_for('settings.user_settings') }}">
-                {{ goals_form.hidden_tag() }}
+                {{ spending_limits_form.hidden_tag() }}
+                
                 <div class="form-group">
-                    {{ goals_form.name.label(class="form-control-label") }}
-                    {{ goals_form.name(class="form-control") }}
+                    {{ spending_limits_form.category.label(class="form-control-label") }}
+                    {{ spending_limits_form.category(class="form-control") }}
                 </div>
+        
                 <div class="form-group">
-                    {{ goals_form.goal_type.label(class="form-control-label") }}
-                    {{ goals_form.goal_type(class="form-control") }}
+                    {{ spending_limits_form.spending_limit.label(class="form-control-label") }}
+                    {{ spending_limits_form.spending_limit(class="form-control") }}
                 </div>
-                <div class="form-group">
-                    {{ goals_form.target_amount.label(class="form-control-label") }}
-                    {{ goals_form.target_amount(class="form-control") }}
-                </div>
-                {{ goals_form.submit(class="btn btn-primary mt-3") }}
+        
+                {{ spending_limits_form.submit(class="btn btn-primary mt-3") }}
             </form>
         </div>
+        
+        
     </div>
+
 {% endblock %}

@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, DateField, SubmitField, DecimalField, SelectField, ValidationError
-from wtforms.validators import InputRequired, Email, Length, DataRequired, EqualTo
+from wtforms.validators import InputRequired, Email, Length, DataRequired, EqualTo, NumberRange
 
 class AccountSettingsForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(min=4, max=32)])
@@ -33,3 +33,11 @@ class SetGoalsForm(FlaskForm):
     def validate_income_goal(form, field):
         if field.data < 0:
             raise ValidationError('Income goal must be a positive value.')
+
+class SpendingLimitsForm(FlaskForm):
+    # The 'validators' parameter enforces a minimum value of 0 and a maximum value of 1000000
+    spending_limit = DecimalField('Spending Limit', places=2, validators=[NumberRange(min=0, max=1000000)])
+    category = SelectField('Category', coerce=int, validators=[InputRequired()])
+    
+    # Create a SubmitField for form submission
+    submit = SubmitField('Save Limits')
