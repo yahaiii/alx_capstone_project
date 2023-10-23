@@ -27,9 +27,26 @@ def add_transaction():
 
     # Pass the categories to the form.
     form.category.choices = [(category.id, category.name) for category in categories]
-    
+
+    # Query transactions for the current user
+    transactions = Transaction.query.filter_by(user_id=current_user.id).all()
+
+    # Create a dictionary to store the total expenses for each category
+    total_expenses = {}
+    for category in categories:
+        total_expenses[category.name] = sum(transaction.amount for transaction in transactions if transaction.category == category and transaction.cashflow == 'expense')
+
+    # Calculate total income
+    total_income = sum(transaction.amount for transaction in transactions if transaction.cashflow == 'income')
+
+    # Calculate total expenses across all categories
+    total_expenses_all_categories = sum(expense for category_name, expense in total_expenses.items())
+
+    # Define category_names variable
+    category_names = list(total_expenses.keys())
+
     if form.validate_on_submit():
-        # Create a new transaction and add it to the database
+        # Add the new transaction to the database
         transaction = Transaction(
             date=form.date.data,
             cashflow=form.cashflow.data,
@@ -37,15 +54,17 @@ def add_transaction():
             mode=form.mode.data,
             comment=form.comment.data,
             amount=form.amount.data,
-            user=current_user 
+            user=current_user
         )
 
-        db.session.add(transaction) 
+        db.session.add(transaction)
         db.session.commit()
         flash('Transaction added successfully', 'success')
         return redirect(url_for('transactions.transaction_history'))
-    
-    return render_template('add_transaction.html', form=form)
+
+    return render_template('add_transaction.html', form=form, total_income=total_income, total_expenses_all_categories=total_expenses_all_categories, transactions=transactions, total_expenses=total_expenses, category_names=category_names)
+
+
 
 @transactions_bp.route('/edit_transaction/<int:transaction_id>', methods=['GET', 'POST'])
 @login_required
@@ -67,6 +86,13 @@ def edit_transaction(transaction_id):
     # Set the choices for the category field in the form
     form.category.choices = category_choices
 
+    # Query transactions for the current user
+    transactions = Transaction.query.filter_by(user_id=current_user.id).all()
+
+    # Calculate total income, total expenses, and account balance
+    total_income = sum(transaction.amount for transaction in transactions if transaction.cashflow == 'income')
+    total_expenses = sum(transaction.amount for transaction in transactions if transaction.cashflow == 'expense')
+
     if form.validate_on_submit():
         # Manually update the transaction with the new data
         transaction.date = form.date.data
@@ -81,7 +107,7 @@ def edit_transaction(transaction_id):
         return redirect(url_for('transactions.transaction_history'))
 
 
-    return render_template('edit_transaction.html', form=form, transaction=transaction)
+    return render_template('edit_transaction.html', form=form, transaction=transaction, total_expenses=total_expenses, total_income=total_income, transactions=transactions)
 
 
 

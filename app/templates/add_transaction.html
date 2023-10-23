@@ -26,7 +26,7 @@
                     {{ form.category(class="form-control", id="category") }}
                 </div>
 
-                <div class="form-group">
+                <div class "form-group">
                     {{ form.mode.label }}
                     {{ form.mode(class="form-control", id="mode") }}
                 </div>
@@ -45,4 +45,30 @@
             </form>
         </div>
     </div>
+    <script>
+        // Create a JavaScript object to store spending limits for each category
+        var spendingLimits = {{ total_expenses_all_categories | tojson }};
+        var categoryNames = {{ category_names | tojson | safe }};
+    
+        // Add an event listener to the form to check the spending limit when the form is submitted
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevent the form from submitting by default
+    
+            // Get the selected category_id from the form
+            var categoryId = document.querySelector('#category').value;
+            var categoryName = categoryNames[categoryId];
+            var spendingLimit = spendingLimits[categoryName];
+    
+            // Get the transaction amount from the form
+            var transactionAmount = parseFloat(document.querySelector('#amount').value);
+    
+            // Check if the spending limit has been exceeded
+            if ( transactionAmount > spendingLimit) {
+                alert(`Spending limit for ${categoryName} has been exceeded!`);
+            } else {
+                // If not exceeded, proceed with form submission
+                event.target.submit();
+            }
+        });
+    </script>
 {% endblock %}
